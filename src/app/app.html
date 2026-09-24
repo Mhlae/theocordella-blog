@@ -1,25 +1,157 @@
 <div class="site-shell" [class.light-mode]="!isDark()">
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="Theocordella home"><span>TC</span><strong>theocordella<span>.</span></strong></a>
+    <a class="brand" href="#top" aria-label="Theocordella home">
+      <span>TC</span>
+      <strong>theocordella</strong>
+    </a>
+
     <nav class="desktop-nav" aria-label="Main navigation">
-      @for (item of copy[language()].nav; track item; let i = $index) { <a [href]="['#about', '#projects', '#contact'][i]">{{ item }}</a> }
+      @for (item of copy[language()].nav; track item; let i = $index) {
+      <a [href]="['#about', '#projects', '#contact'][i]">{{ item }}</a>
+      }
     </nav>
+
     <div class="header-actions">
       <div class="language-switcher" aria-label="Language selector">
-        @for (option of ['pt', 'en', 'es']; track option) { <button type="button" [class.active]="language() === option" (click)="setLanguage(option === 'pt' ? 'pt' : option === 'en' ? 'en' : 'es')">{{ option }}</button> }
+        @for (option of ['pt', 'en', 'es']; track option) {
+        <button type="button" [class.active]="language() === option"
+          (click)="setLanguage(option === 'pt' ? 'pt' : option === 'en' ? 'en' : 'es')">{{ option }}</button>
+        }
+
       </div>
-      <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="isDark() ? 'Use light theme' : 'Use dark theme'"><span>{{ isDark() ? '☼' : '☾' }}</span></button>
+
+      <button class="theme-toggle" type="button" (click)="toggleTheme()"
+        [attr.aria-label]="isDark() ? 'Use light theme' : 'Use dark theme'">
+        <span>{{ isDark() ? '☼' : '☾' }}</span>
+      </button>
+
     </div>
+
   </header>
+
   <main id="top">
     <section class="hero section-grid">
-      <div class="hero-copy reveal"><p class="eyebrow"><span class="eyebrow-line"></span>{{ copy[language()].eyebrow }}</p><h1>{{ copy[language()].title }}</h1><p class="hero-intro">{{ copy[language()].intro }}</p><div class="hero-actions"><a class="button button-primary" href="#projects">{{ copy[language()].projects }} <span>↗</span></a><a class="button button-quiet" href="#contact">{{ copy[language()].contact }} <span>↗</span></a></div><div class="hero-meta"><span class="status-dot"></span>{{ copy[language()].availability }}</div></div>
-      <div class="hero-visual reveal-delay"><div class="portrait-frame"><img src="https://avatars.githubusercontent.com/u/106108959?v=4" alt="Théo Couto Cordella" /><div class="portrait-tag">SANTOS · SP<br /><b>BRASIL</b></div></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="focus-note"><span>{{ copy[language()].focus }}</span><strong>{{ copy[language()].focusText }}</strong></div></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow">
+          <span class="eyebrow-line"></span>
+          {{copy[language()].eyebrow}}
+        </p>
+        <h1>{{ copy[language()].title }}</h1>
+        <p class="hero-intro">{{ copy[language()].intro }}</p>
+        <div class="hero-actions"><a class="button button-primary" href="#projects">{{ copy[language()].projects }}
+            <span>↗</span></a>
+          <a class="button button-quiet" href="#contact">{{ copy[language()].contact }} <span>↗</span></a>
+        </div>
+        <div class="hero-meta"><span class="status-dot"></span>
+          {{ copy[language()].availability }}</div>
+      </div>
+      <div class="hero-visual reveal-delay">
+        <div class="portrait-frame">
+          <img
+            src="https://media.licdn.com/dms/image/v2/D4E03AQFknrtAhIdv7w/profile-displayphoto-crop_800_800/B4EaDRO8GcJkAI-/0/1790216751540?e=1792022400&v=beta&t=Eux0dYLLW0BtEJQigQRHV7Ode5_whiTIo3GrE_93fdo"
+            alt="Théo Couto Cordella" />
+          <div class="portrait-tag">SANTOS · SP<br /><b>BRASIL</b></div>
+        </div>
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+      </div>
       <a class="scroll-cue" href="#about"><span>↓</span>{{ copy[language()].scroll }}</a>
     </section>
-    <section id="about" class="about section-grid content-section"><div><p class="section-label">{{ copy[language()].aboutLabel }}</p><p class="big-number">01</p></div><div class="section-content"><h2>{{ copy[language()].aboutTitle }}</h2><p class="body-copy">{{ copy[language()].aboutText }}</p><p class="skill-label">{{ copy[language()].skillLabel }}</p><div class="skills">@for (skill of skills; track skill) { <span>{{ skill }}</span> }</div></div></section>
-    <section id="projects" class="projects content-section"><div class="section-heading"><div><p class="section-label">{{ copy[language()].projectsLabel }}</p><h2>{{ copy[language()].projectsTitle }}</h2></div><span class="project-index">02 / 05</span></div><div class="project-grid"><article class="project-card project-card-primary"><div class="project-top"><span>01</span><span>FULL-STACK</span></div><h3>Cadastro de Clientes</h3><p>API REST completa com frontend React e banco de dados relacional.</p><div class="project-footer"><span>Node · React · SQLite</span><a href="https://github.com/Mhlae" target="_blank" rel="noopener">{{ copy[language()].viewGithub }} ↗</a></div></article><article class="project-card"><div class="project-top"><span>02</span><span>CLI APP</span></div><h3>Todo List <em>Rust</em></h3><p>Gerenciador de tarefas via terminal, explorando uma linguagem de sistemas.</p><div class="project-footer"><span>Rust · CLI</span><a href="https://github.com/Mhlae" target="_blank" rel="noopener">{{ copy[language()].viewGithub }} ↗</a></div></article><article class="project-card"><div class="project-top"><span>03</span><span>WEB APP</span></div><h3>Shirley Semijoias</h3><p>Website de catálogo e presença digital para uma marca de semijoias.</p><div class="project-footer"><span>React · JavaScript</span><a href="https://shirleysemijoias.vercel.app" target="_blank" rel="noopener">Visitar site ↗</a></div></article><article class="project-card"><div class="project-top"><span>04</span><span>PLATFORM</span></div><h3>OnyxStack</h3><p>Plataforma web construída para apresentar uma experiência moderna em React.</p><div class="project-footer"><span>React · JavaScript</span><a href="https://onyxstack.theocordella.com.br" target="_blank" rel="noopener">Visitar site ↗</a></div></article><article class="project-card project-card-wide"><div class="project-top"><span>05</span><span>PORTFOLIO</span></div><h3>theocordella.com.br</h3><p>Meu portfólio profissional: uma experiência pessoal para conectar projetos, trajetória e oportunidades.</p><div class="project-footer"><span>Angular · TypeScript · SCSS</span><a href="https://theocordella.com.br" target="_blank" rel="noopener">Visitar site ↗</a></div></article></div></section>
-    <section id="contact" class="contact content-section"><div><p class="section-label">{{ copy[language()].contactLabel }}</p><h2>{{ copy[language()].contactTitle }}</h2><p class="body-copy">{{ copy[language()].contactText }}</p><a class="button button-primary" href="mailto:theocordella@proton.me">{{ copy[language()].email }} <span>↗</span></a></div><div class="contact-links"><a href="mailto:theocordella@proton.me">theocordella@proton.me <span>↗</span></a><a href="https://www.linkedin.com/in/theo-cordella-89b91434a/" target="_blank" rel="noopener">LinkedIn <span>↗</span></a><a href="https://github.com/Mhlae" target="_blank" rel="noopener">GitHub <span>↗</span></a></div></section>
+    <section id="about" class="about section-grid content-section">
+      <div>
+        <p class="section-label">{{ copy[language()].aboutLabel }}</p>
+        <p class="big-number">01</p>
+      </div>
+      <div class="section-content">
+        <h2>{{ copy[language()].aboutTitle }}</h2>
+        <p class="body-copy">{{ copy[language()].aboutText }}</p>
+        <p class="skill-label">{{ copy[language()].skillLabel }}</p>
+        <div class="skills">@for (skill of skills; track skill) { <span>{{ skill }}</span> }</div>
+      </div>
+    </section>
+    <section id="projects" class="projects content-section">
+      
+      <div class="section-heading">
+        <div>
+          <p class="section-label">{{ copy[language()].projectsLabel }}</p>
+          <h2>{{ copy[language()].projectsTitle }}</h2>
+        </div><span class="project-index">02 / 05</span>
+      </div>
+      <div class="project-grid"> <!-- -->
+        <article class="project-card project-card-wide">
+          <div class="project-top">
+            <span>01</span>
+            <span>PLATFORM</span>
+          </div>
+          <h3>OnyxStack</h3>
+          <p>Plataforma web construída para apresentar uma experiência moderna em React.</p>
+          <div class="project-footer">
+            <span>React · JavaScript</span>
+            <a href="https://onyxstack.theocordella.com.br" target="_blank" rel="noopener">
+              Visitar site ↗
+            </a>
+          </div>
+        </article>
+        <article class="project-card project-card-primary">
+          <div class="project-top">
+            <span>02</span>
+            <span>PORTFOLIO</span>
+          </div>
+          <h3>theocordella.com.br</h3>
+          <p>Meu portfólio profissional: uma experiência pessoal para conectar projetos, trajetória e oportunidades.</p>
+          <div class="project-footer">
+            <span>Angular · TypeScript · SCSS</span>
+            <a href="https://theocordella.com.br" target="_blank" rel="noopener">
+              Visitar site ↗
+            </a>
+          </div>
+        </article>
+        <article class="project-card project-card-wide">
+          <div class="project-top">
+            <span>03</span>
+            <span>FULL-STACK</span>
+          </div>
+          <h3>Cadastro de Clientes</h3>
+          <p>API REST completa com frontend React e banco de dados relacional.</p>
+          <div class="project-footer">
+            <span>Node · React · SQLite</span>
+            <a href="https://github.com/Mhlae" target="_blank" rel="noopener">
+              {{ copy[language()].viewGithub }} ↗</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-top">
+            <span>04</span>
+            <span>WEB APP</span>
+          </div>
+          <h3>Shirley Semijoias</h3>
+          <p>Website de catálogo e presença digital para uma marca de semijoias.</p>
+          <div class="project-footer">
+            <span>React · JavaScript</span>
+            <a href="https://shirleysemijoias.vercel.app" target="_blank" rel="noopener">
+              Visitar site ↗
+            </a>
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    <section id="contact" class="contact content-section">
+      <div>
+        <p class="section-label">{{ copy[language()].contactLabel }}</p>
+        <h2>{{ copy[language()].contactTitle }}</h2>
+        <p class="body-copy">{{ copy[language()].contactText }}</p>
+        <a class="button button-primary" href="mailto:theocordella@proton.me">
+          {{ copy[language()].email }} <span>↗</span>
+        </a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:theocordella@proton.me">theocordella@proton.me <span>↗</span></a>
+        <a href="https://www.linkedin.com/in/theo-cordella-89b91434a/" target="_blank" rel="noopener">LinkedIn
+          <span>↗</span></a>
+        <a href="https://github.com/Mhlae" target="_blank" rel="noopener">GitHub <span>↗</span></a>
+      </div>
+    </section>
   </main>
   <footer><span>© 2026 THEOCORDELLA</span><span>JAVA · ANGULAR </span></footer>
 </div>
