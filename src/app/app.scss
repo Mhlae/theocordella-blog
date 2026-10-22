@@ -56,10 +56,6 @@
     letter-spacing: 0;
 }
 
-.brand strong span {
-    color: var(--accent);
-}
-
 .desktop-nav {
     display: flex;
     gap: 35px;
@@ -130,7 +126,6 @@
 .section-label,
 .skill-label,
 .project-top,
-.blog-date,
 footer {
     font: 10px 'DM Mono', monospace;
     letter-spacing: .13em;
@@ -164,6 +159,14 @@ footer {
     color: var(--muted);
     font-size: 17px;
     line-height: 1.6;
+}
+
+.hero-role {
+    color: var(--accent);
+    font: 12px 'DM Mono', monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin: -15px 0 20px;
 }
 
 .hero-actions {
@@ -217,7 +220,6 @@ footer {
     height: 7px;
     background: var(--accent);
     border-radius: 50%;
-    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
 .hero-visual {
@@ -279,17 +281,6 @@ footer {
 }
 
 
-.focus-note span {
-    color: var(--muted);
-    font: 9px 'DM Mono', monospace;
-    text-transform: uppercase;
-}
-
-.focus-note strong {
-    font-size: 13px;
-    font-weight: 400;
-}
-
 .scroll-cue {
     position: absolute;
     bottom: 28px;
@@ -316,8 +307,8 @@ footer {
 
 .about {
     display: grid;
-    grid-template-columns: .35fr 1fr;
-    gap: 70px;
+    grid-template-columns: minmax(180px, .4fr) minmax(0, 1fr);
+    gap: clamp(35px, 6vw, 70px);
 }
 
 .big-number {
@@ -335,6 +326,10 @@ footer {
     line-height: 1;
     font-weight: 500;
     margin: 0 0 32px;
+}
+
+.section-content h2 {
+    max-width: 700px;
 }
 
 .body-copy {
@@ -361,6 +356,38 @@ footer {
     border: 1px solid var(--line);
     color: var(--text);
     font: 11px 'DM Mono', monospace;
+}
+
+.skill-groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.skill-group h3,
+.education-details h3 {
+    color: var(--muted);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.skill-group .skills {
+    margin-top: 12px;
+}
+
+.skill-group {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.skill-group .skills span {
+    overflow-wrap: anywhere;
 }
 
 .section-heading {
@@ -408,27 +435,11 @@ footer {
     color: var(--muted);
 }
 
-.project-top h3 {
-    font-size: 19px;
-    font-weight: 500;
-    margin: 0;
-}
-
-.project-card-primary .project-top,
-.project-card-primary .project-footer {
-    color: var(--muted);
-}
-
 .project-card h3 {
     font-size: 34px;
     letter-spacing: -.06em;
     font-weight: 500;
     margin: 20px 0 10px;
-}
-
-.project-card h3 em {
-    color: var(--accent);
-    font-style: normal;
 }
 
 .project-card p {
@@ -446,43 +457,11 @@ footer {
     text-transform: uppercase;
 }
 
-.project-footer a,
-.text-link {
+.project-footer a {
     color: inherit;
     text-decoration: none;
     border-bottom: 1px solid currentColor;
     padding-bottom: 3px;
-}
-
-.blog-feature {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 34px 0;
-    display: grid;
-    grid-template-columns: .3fr 1fr auto;
-    align-items: center;
-    gap: 28px;
-}
-
-.blog-feature h3 {
-    font-size: 25px;
-    font-weight: 500;
-    margin: 0;
-}
-
-.blog-feature p {
-    color: var(--muted);
-    line-height: 1.5;
-    margin: 0;
-    max-width: 280px;
-}
-
-.blog-feature a {
-    color: var(--accent);
-    text-decoration: none;
-    font: 10px 'DM Mono', monospace;
-    text-transform: uppercase;
-    white-space: nowrap;
 }
 
 .contact {
@@ -490,6 +469,95 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 120px;
     align-items: end;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+        "higher courses"
+        "languages courses";
+    gap: 18px;
+}
+
+.education-higher {
+    grid-area: higher;
+}
+
+.education-languages {
+    grid-area: languages;
+}
+
+.education-courses {
+    grid-area: courses;
+}
+
+.education-card {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.education-card h3 {
+    color: var(--muted);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.education-status {
+    color: var(--accent);
+    font: 10px 'DM Mono', monospace;
+    text-transform: uppercase;
+}
+
+.education-card-content {
+    display: grid;
+    justify-items: start;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.education-card-content strong {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.education-card-content > span:not(.education-status) {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.course-list,
+.language-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0;
+}
+
+.course-list li,
+.language-list li {
+    display: grid;
+    gap: 6px;
+    padding: 13px 0;
+    border-top: 1px solid var(--line);
+}
+
+.course-list strong,
+.language-list strong {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.course-list li > span:not(.education-status),
+.language-list li > span {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
 }
 
 .contact .button {
@@ -523,7 +591,6 @@ footer {
     display: flex;
     justify-content: space-between;
     color: var(--muted);
-    font-size: 9px;
 }
 
 
@@ -591,10 +658,6 @@ footer {
         height: 350px;
     }
 
-    .focus-note {
-        right: 0;
-    }
-
     .content-section {
         padding: 85px 20px;
     }
@@ -603,6 +666,18 @@ footer {
     .contact {
         grid-template-columns: 1fr;
         gap: 35px;
+    }
+
+    .education-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "higher"
+            "languages"
+            "courses";
+    }
+
+    .skill-groups {
+        grid-template-columns: 1fr;
     }
 
     .big-number {
@@ -618,25 +693,18 @@ footer {
         margin-top: 30px;
     }
 
+    .course-list li,
+    .language-list li {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .project-grid {
         grid-template-columns: 1fr;
     }
 
     .project-card {
         min-height: 290px;
-    }
-
-    .blog-feature {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-
-    .blog-feature a {
-        justify-self: start;
-    }
-
-    .contact-links {
-        margin-top: 25px;
     }
 
     .site-shell footer {
