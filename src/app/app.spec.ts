@@ -22,6 +22,14 @@ describe('App', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain('Theo Cordella');
     expect(compiled.querySelector('.hero-meta')?.textContent).toContain('Início imediato');
     expect(compiled.querySelectorAll('.project-card')).toHaveLength(6);
+    expect(compiled.querySelector('.project-card h3')?.textContent).toContain('Portfólio Pessoal');
+    expect(compiled.querySelector('.project-card a')?.getAttribute('href')).toBe('https://theocordella.com.br');
+    expect(compiled.querySelectorAll('.project-card a')[1].getAttribute('href')).toBe(
+      'https://github.com/mhlae/todolist-fullstack',
+    );
+    expect(compiled.querySelectorAll('.project-card a')[2].getAttribute('href')).toBe(
+      'https://github.com/mhlae/cadastro-clientes',
+    );
     expect(compiled.querySelector('#education')?.textContent).toContain('Engenharia de Software');
     expect(compiled.querySelectorAll('.education-card')).toHaveLength(3);
     expect(compiled.querySelector('#education')?.textContent).toContain('Ensino Superior');
@@ -44,7 +52,7 @@ describe('App', () => {
     fixture.detectChanges();
 
     expect(compiled.querySelector('#projects h2')?.textContent).toContain('Projects');
-    expect(compiled.querySelector('.project-card h3')?.textContent).toContain('Customer Registration System');
-    expect(compiled.querySelector('.project-card .project-top')?.textContent).toContain('FULL-STACK');
+    expect(compiled.querySelector('.project-card h3')?.textContent).toContain('Personal Portfolio');
+    expect(compiled.querySelector('.project-card .project-top')?.textContent).toContain('PORTFOLIO');
   });
 });
