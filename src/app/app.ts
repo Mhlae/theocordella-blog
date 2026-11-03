@@ -1,17 +1,28 @@
-import { Component, signal } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Component, inject, PLATFORM_ID, signal } from '@angular/core';
+import { HeroComponent } from './hero.component';
 
 @Component({
   selector: 'app-root',
+  imports: [HeroComponent],
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly isDark = signal(true);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly document = inject(DOCUMENT);
+  protected readonly isDark = signal(this.getInitialTheme());
   protected readonly language = signal<'pt' | 'en' | 'es'>('pt');
+  protected readonly languageOptions = ['pt', 'en', 'es'] as const;
 
   protected readonly copy = {
     pt: {
-      nav: ['Sobre', 'Projetos', 'Formação', 'Contato'],
+      nav: ['Início', 'Projetos', 'Sobre', 'Formação', 'Contato'],
+      navigationLabel: 'Navegação principal',
+      languageSelector: 'Seletor de idioma',
+      home: 'Início',
+      useLightTheme: 'Ativar tema claro',
+      useDarkTheme: 'Ativar tema escuro',
       eyebrow: 'DESENVOLVEDOR DE SOFTWARE FULL-STACK',
       role: 'Desenvolvedor de Software Full-Stack',
       intro:
@@ -84,7 +95,12 @@ export class App {
       footer: 'DESENVOLVIMENTO FULL-STACK',
     },
     en: {
-      nav: ['About', 'Projects', 'Education', 'Contact'],
+      nav: ['Home', 'Projects', 'About', 'Education', 'Contact'],
+      navigationLabel: 'Main navigation',
+      languageSelector: 'Language selector',
+      home: 'Home',
+      useLightTheme: 'Use light theme',
+      useDarkTheme: 'Use dark theme',
       eyebrow: 'FULL-STACK SOFTWARE DEVELOPER',
       role: 'Full-Stack Software Developer',
       intro:
@@ -156,7 +172,12 @@ export class App {
       footer: 'FULL-STACK DEVELOPMENT',
     },
     es: {
-      nav: ['Sobre mí', 'Proyectos', 'Formación', 'Contacto'],
+      nav: ['Inicio', 'Proyectos', 'Sobre mí', 'Formación', 'Contacto'],
+      navigationLabel: 'Navegación principal',
+      languageSelector: 'Selector de idioma',
+      home: 'Inicio',
+      useLightTheme: 'Activar tema claro',
+      useDarkTheme: 'Activar tema oscuro',
       eyebrow: 'DESARROLLADOR DE SOFTWARE FULL-STACK',
       role: 'Desarrollador de Software Full-Stack',
       intro:
@@ -271,11 +292,48 @@ export class App {
   protected readonly courseIndexes = [0, 1, 2, 3];
   protected readonly languages = ['Inglês', 'Espanhol'];
 
+  constructor() {
+    this.applyTheme(false);
+  }
+
   protected toggleTheme(): void {
     this.isDark.update((value) => !value);
+    this.applyTheme(true);
   }
 
   protected setLanguage(language: 'pt' | 'en' | 'es'): void {
     this.language.set(language);
+  }
+
+  private getInitialTheme(): boolean {
+    if (!isPlatformBrowser(this.platformId)) {
+      return true;
+    }
+
+    try {
+      const savedTheme = window.localStorage.getItem('theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        return savedTheme === 'dark';
+      }
+    } catch (error) {
+      console.warn('Unable to read the saved theme preference.', error);
+    }
+
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? true;
+  }
+
+  private applyTheme(persist: boolean): void {
+    const theme = this.isDark() ? 'dark' : 'light';
+    this.document.documentElement.dataset['theme'] = theme;
+
+    if (!persist || !isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    try {
+      window.localStorage.setItem('theme', theme);
+    } catch (error) {
+      console.warn('Unable to save the theme preference.', error);
+    }
   }
 }

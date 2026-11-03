@@ -1,59 +1,37 @@
-<div class="site-shell" [class.light-mode]="!isDark()">
+<div class="site-shell">
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="Theocordella home">
-      <span>TC</span>
-      <strong>theocordella</strong>
+    <a class="brand" href="#top" [attr.aria-label]="copy[language()].home">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="m16 2 12 7v14l-12 7L4 23V9l12-7Z" />
+      </svg>
+      <strong>THÉO CORDELLA</strong>
     </a>
 
-    <nav class="desktop-nav" aria-label="Main navigation">
-      @for (item of copy[language()].nav; track item; let i = $index) {
-      <a [href]="['#about', '#projects', '#education', '#contact'][i]">{{ item }}</a>
+    <nav class="desktop-nav" [attr.aria-label]="copy[language()].navigationLabel">
+      @for (item of copy[language()].nav; track $index; let i = $index) {
+      <a [href]="['#top', '#projects', '#about', '#education', '#contact'][i]">{{ item }}</a>
       }
     </nav>
 
     <div class="header-actions">
-      <div class="language-switcher" aria-label="Language selector">
-        @for (option of ['pt', 'en', 'es']; track option) {
+      <div class="language-switcher" [attr.aria-label]="copy[language()].languageSelector">
+        @for (option of languageOptions; track option) {
         <button type="button" [class.active]="language() === option"
+          [attr.aria-pressed]="language() === option"
           (click)="setLanguage(option === 'pt' ? 'pt' : option === 'en' ? 'en' : 'es')">{{ option }}</button>
         }
       </div>
 
       <button class="theme-toggle" type="button" (click)="toggleTheme()"
-        [attr.aria-label]="isDark() ? 'Use light theme' : 'Use dark theme'">
-        <span>{{ isDark() ? '☼' : '☾' }}</span>
+        [attr.aria-label]="isDark() ? copy[language()].useLightTheme : copy[language()].useDarkTheme">
+        <span aria-hidden="true">{{ isDark() ? '☼' : '☾' }}</span>
       </button>
+      <a class="header-contact" href="#contact">{{ copy[language()].contact }} <span aria-hidden="true">→</span></a>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero section-grid">
-      <div class="hero-copy reveal">
-        <p class="eyebrow">
-          <span class="eyebrow-line"></span>
-          {{ copy[language()].eyebrow }}
-        </p>
-        <h1>Theo Cordella</h1>
-        <p class="hero-role">{{ copy[language()].role }}</p>
-        <p class="hero-intro">{{ copy[language()].intro }}</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#projects">{{ copy[language()].projects }} <span>↗</span></a>
-          <a class="button button-quiet" href="#contact">{{ copy[language()].contact }} <span>↗</span></a>
-        </div>
-        <div class="hero-meta"><span class="status-dot"></span>{{ copy[language()].availability }}</div>
-      </div>
-      <div class="hero-visual reveal-delay">
-        <div class="portrait-frame">
-          <img
-            src="https://media.licdn.com/dms/image/v2/D4E03AQFknrtAhIdv7w/profile-displayphoto-crop_800_800/B4EaDRO8GcJkAI-/0/1790216751540?e=1793836800&v=beta&t=yMFoT8Ubf5H8231eDVtc3p8PEH9abu9uNoIVaolfteg"
-            alt="Theo Cordella" />
-          <div class="portrait-tag">{{ copy[language()].location }}<br /><b>BRASIL</b></div>
-        </div>
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-      </div>
-      <a class="scroll-cue" href="#about"><span>↓</span>{{ copy[language()].scroll }}</a>
-    </section>
+    <app-hero [language]="language()" />
 
     <section id="about" class="about section-grid content-section">
       <div>
@@ -69,7 +47,7 @@
           <div class="skill-group">
             <h3>{{ copy[language()].skillGroups[$index] }}</h3>
             <div class="skills">
-              @for (skill of group; track skill) {
+              @for (skill of group; track $index) {
               <span>{{ skill }}</span>
               }
             </div>
@@ -94,6 +72,9 @@
         @for (project of projects; track project.name; let i = $index) {
         <article class="project-card" [class.project-card-primary]="i === 0">
           <div class="project-top">
+            <span class="project-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" /><path d="m4.5 7.8 7.5 4.4 7.5-4.4M12 12.2V21" /></svg>
+            </span>
             <span>{{ (i + 1).toString().padStart(2, '0') }}</span>
             <span>{{ copy[language()].projectCategories[i] }}</span>
           </div>
@@ -103,7 +84,8 @@
             <span>{{ project.technologies }}</span>
             @if (project.url) {
             <a [href]="project.url" target="_blank" rel="noopener">
-              {{ project.github ? copy[language()].viewGithub : copy[language()].visitSite }} ↗
+              <span>{{ project.github ? copy[language()].viewGithub : copy[language()].visitSite }}</span>
+              <span class="project-arrow" aria-hidden="true">↗</span>
             </a>
             }
           </div>
@@ -112,6 +94,7 @@
       </div>
     </section>
 
+    <span id="estudos" class="anchor-alias" aria-hidden="true"></span>
     <section id="education" class="education content-section">
       <div class="section-heading">
         <div>

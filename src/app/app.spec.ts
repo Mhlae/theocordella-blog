@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
+    localStorage.removeItem('theme');
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter([])],
     })
       .compileComponents();
   });
@@ -20,7 +23,13 @@ describe('App', () => {
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Theo Cordella');
-    expect(compiled.querySelector('.hero-meta')?.textContent).toContain('Início imediato');
+    expect(compiled.querySelector('.hero-role')?.textContent).toContain(
+      'Desenvolvedor de software e soluções digitais.',
+    );
+    expect(compiled.querySelector('.desktop-nav a')?.textContent?.trim()).toBe('Início');
+    expect(compiled.querySelector('.desktop-nav a')?.getAttribute('href')).toBe('#top');
+    expect(compiled.querySelector('.orbit-ring')?.children).toHaveLength(4);
+    expect(compiled.querySelector('#architecture')?.textContent).toContain('Arquitetura com propósito');
     expect(compiled.querySelectorAll('.project-card')).toHaveLength(6);
     expect(compiled.querySelector('.project-card h3')?.textContent).toContain('Portfólio Pessoal');
     expect(compiled.querySelector('.project-card a')?.getAttribute('href')).toBe('https://theocordella.com.br');
@@ -52,7 +61,38 @@ describe('App', () => {
     fixture.detectChanges();
 
     expect(compiled.querySelector('#projects h2')?.textContent).toContain('Projects');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Theo Cordella');
+    expect(compiled.querySelector('.hero-role')?.textContent).toContain(
+      'Software developer and digital solutions specialist.',
+    );
     expect(compiled.querySelector('.project-card h3')?.textContent).toContain('Personal Portfolio');
     expect(compiled.querySelector('.project-card .project-top')?.textContent).toContain('PORTFOLIO');
+
+    const spanishButton = Array.from(compiled.querySelectorAll('.language-switcher button'))
+      .find((button) => button.textContent?.trim() === 'es');
+    spanishButton?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.hero-role')?.textContent).toContain(
+      'Desarrollador de software y soluciones digitales.',
+    );
+    expect(compiled.querySelector('.desktop-nav a')?.textContent?.trim()).toBe('Inicio');
+  });
+
+  it('should restore and persist the selected theme', async () => {
+    localStorage.setItem('theme', 'light');
+
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(document.documentElement.dataset['theme']).toBe('light');
+
+    const themeButton = fixture.nativeElement.querySelector('.theme-toggle') as HTMLButtonElement;
+    themeButton.click();
+    fixture.detectChanges();
+
+    expect(document.documentElement.dataset['theme']).toBe('dark');
+    expect(localStorage.getItem('theme')).toBe('dark');
   });
 });
