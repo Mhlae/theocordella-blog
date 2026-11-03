@@ -1,0 +1,131 @@
+<main class="studies-page page-content">
+  <header class="page-heading">
+    <p class="section-kicker">{{ copy().studies.title }}</p>
+    <h1>{{ copy().studies.title }}</h1>
+    <div class="studies-intro">
+      <h2>{{ copy().studies.profileHeadline }}</h2>
+      <p>{{ copy().studies.profileText }}</p>
+    </div>
+  </header>
+
+  <nav class="study-tabs" role="tablist" [attr.aria-label]="copy().studies.title">
+    <a
+      id="education-tab"
+      role="tab"
+      data-tab="education"
+      routerLink="/studies"
+      [queryParams]="{ tab: 'education' }"
+      [attr.aria-selected]="selectedTab() === 'education'"
+      [attr.tabindex]="selectedTab() === 'education' ? 0 : -1"
+      aria-controls="study-panel">
+      {{ copy().studies.formationTab }}
+    </a>
+    <a
+      id="technologies-tab"
+      role="tab"
+      data-tab="technologies"
+      routerLink="/studies"
+      [queryParams]="{ tab: 'technologies' }"
+      [attr.aria-selected]="selectedTab() === 'technologies'"
+      [attr.tabindex]="selectedTab() === 'technologies' ? 0 : -1"
+      aria-controls="study-panel">
+      {{ copy().studies.technologiesTab }}
+    </a>
+    <a
+      id="certificates-tab"
+      role="tab"
+      data-tab="certificates"
+      routerLink="/studies"
+      [queryParams]="{ tab: 'certificates' }"
+      [attr.aria-selected]="selectedTab() === 'certificates'"
+      [attr.tabindex]="selectedTab() === 'certificates' ? 0 : -1"
+      aria-controls="study-panel">
+      {{ copy().studies.certificatesTab }}
+    </a>
+  </nav>
+
+  <section
+    id="study-panel"
+    class="study-panel"
+    role="tabpanel"
+    tabindex="0"
+    [attr.aria-labelledby]="selectedTab() + '-tab'">
+    @if (selectedTab() === 'education') {
+      <div class="formation-grid">
+        <article class="study-card degree-card">
+          <p class="card-label">{{ copy().studies.higherEducation }}</p>
+          <h2>{{ copy().studies.degree }}</h2>
+          <p class="institution">{{ copy().studies.institution }}</p>
+          <span class="study-status">{{ copy().studies.studying }}</span>
+        </article>
+
+        <article class="study-card">
+          <p class="card-label">{{ copy().studies.languagesTitle }}</p>
+          <ul class="study-list">
+            @for (language of copy().studies.languages; track language.name) {
+              <li>
+                <strong>{{ language.name }}</strong>
+                <span>{{ language.level }}</span>
+              </li>
+            }
+          </ul>
+        </article>
+
+        <article class="study-card courses-card">
+          <p class="card-label">{{ copy().studies.coursesTitle }}</p>
+          <ul class="study-list">
+            @for (course of copy().studies.courses; track course.name) {
+              <li>
+                <strong>{{ course.name }}</strong>
+                <span>{{ course.provider }}</span>
+                @if (course.status) {
+                  <span class="study-status">{{ course.status }}</span>
+                }
+              </li>
+            }
+          </ul>
+        </article>
+      </div>
+    } @else if (selectedTab() === 'technologies') {
+      <div class="technology-grid">
+        @for (group of copy().studies.groups; track group.title) {
+          <article class="study-card technology-card">
+            <h2>{{ group.title }}</h2>
+            <ul class="technology-list">
+              @for (item of group.items; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+            @if (group.note) {
+              <p class="technology-note">{{ group.note }}</p>
+            }
+          </article>
+        }
+      </div>
+    } @else {
+      @if (certificates.length) {
+        <div class="certificate-grid">
+          @for (certificate of certificates; track certificate.file) {
+            <article class="study-card certificate-card">
+              <h2>{{ certificate.title }}</h2>
+              <p class="certificate-issuer">{{ certificate.issuer }}</p>
+              <div class="certificate-details">
+                <time>{{ certificate.date }}</time>
+                <span>{{ certificate.hours }}</span>
+              </div>
+              <a [href]="certificate.url" target="_blank" rel="noopener">
+                {{ copy().studies.certificateButton }} <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <span class="empty-icon" aria-hidden="true">✦</span>
+          <h2>{{ copy().studies.certificatesEmpty }}</h2>
+          <p>{{ copy().studies.certificatesEmptyText }}</p>
+        </div>
+      }
+    }
+  </section>
+</main>

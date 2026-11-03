@@ -1,0 +1,35 @@
+<main class="about-page page-content">
+  <section class="personal-profile" aria-labelledby="about-title">
+    <figure class="portrait-frame">
+      <img
+        src="/images/theo.png"
+        [alt]="copy().about.photoAlt"
+        width="480"
+        height="600"
+        loading="eager"
+        fetchpriority="high"
+        [class.image-hidden]="imageFailed()"
+        (error)="onImageError()">
+      @if (imageFailed()) {
+        <div class="photo-placeholder" role="img" [attr.aria-label]="copy().about.photoAlt">
+          <svg viewBox="0 0 120 140" aria-hidden="true">
+            <path d="M60 4 112 34v72l-52 30L8 106V34L60 4Z" />
+            <text x="60" y="82" text-anchor="middle">TC</text>
+          </svg>
+        </div>
+      }
+    </figure>
+
+    <div class="profile-copy">
+      <p class="section-kicker">{{ copy().about.title }}</p>
+      <h1 id="about-title">{{ copy().about.title }}</h1>
+      <p class="personal-intro">{{ copy().about.personalText }}</p>
+      <div class="profile-actions">
+        <a class="action action-primary" routerLink="/studies">
+          {{ copy().about.studiesLink }} <span aria-hidden="true">→</span>
+        </a>
+        <a class="action action-secondary" routerLink="/contact">{{ copy().about.contactLink }}</a>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,165 +1,51 @@
 <div class="site-shell">
   <header class="site-header">
-    <a class="brand" href="#top" [attr.aria-label]="copy[language()].home">
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path d="m16 2 12 7v14l-12 7L4 23V9l12-7Z" />
-      </svg>
-      <strong>THÉO CORDELLA</strong>
-    </a>
-
-    <nav class="desktop-nav" [attr.aria-label]="copy[language()].navigationLabel">
-      @for (item of copy[language()].nav; track $index; let i = $index) {
-      <a [href]="['#top', '#projects', '#about', '#education', '#contact'][i]">{{ item }}</a>
-      }
-    </nav>
+    <div class="header-leading">
+      <span class="brand"><strong>Théo Cordella</strong></span>
+      <a
+        class="back-home"
+        routerLink="/home"
+        routerLinkActive="home-active"
+        #homeRoute="routerLinkActive"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [attr.aria-hidden]="homeRoute.isActive ? true : null"
+        [attr.aria-label]="homeRoute.isActive ? null : copy.returnHome"
+      >
+        <span aria-hidden="true">←</span>{{ copy.returnHome }}
+      </a>
+    </div>
 
     <div class="header-actions">
-      <div class="language-switcher" [attr.aria-label]="copy[language()].languageSelector">
+      <div class="language-switcher" role="group" [attr.aria-label]="copy.languageLabel">
         @for (option of languageOptions; track option) {
-        <button type="button" [class.active]="language() === option"
-          [attr.aria-pressed]="language() === option"
-          (click)="setLanguage(option === 'pt' ? 'pt' : option === 'en' ? 'en' : 'es')">{{ option }}</button>
+          <button
+            type="button"
+            [class.active]="languageService.current() === option"
+            [attr.aria-pressed]="languageService.current() === option"
+            [attr.aria-label]="
+              copy[option === 'pt' ? 'portuguese' : option === 'en' ? 'english' : 'spanish']
+            "
+            (click)="setLanguage(option)"
+          >
+            {{ option }}
+          </button>
         }
       </div>
 
-      <button class="theme-toggle" type="button" (click)="toggleTheme()"
-        [attr.aria-label]="isDark() ? copy[language()].useLightTheme : copy[language()].useDarkTheme">
-        <span aria-hidden="true">{{ isDark() ? '☼' : '☾' }}</span>
+      <button
+        class="theme-toggle"
+        type="button"
+        (click)="toggleTheme()"
+        [attr.aria-label]="themeService.isDark() ? copy.lightTheme : copy.darkTheme"
+      >
+        <span aria-hidden="true">{{ themeService.isDark() ? '☼' : '☾' }}</span>
       </button>
-      <a class="header-contact" href="#contact">{{ copy[language()].contact }} <span aria-hidden="true">→</span></a>
     </div>
   </header>
 
-  <main id="top">
-    <app-hero [language]="language()" />
-
-    <section id="about" class="about section-grid content-section">
-      <div>
-        <p class="section-label">{{ copy[language()].aboutLabel }}</p>
-        <p class="big-number">01</p>
-      </div>
-      <div class="section-content">
-        <h2>{{ copy[language()].aboutTitle }}</h2>
-        <p class="body-copy">{{ copy[language()].aboutText }}</p>
-        <p class="skill-label">{{ copy[language()].skillLabel }}</p>
-        <div class="skill-groups">
-          @for (group of copy[language()].skillItems; track $index) {
-          <div class="skill-group">
-            <h3>{{ copy[language()].skillGroups[$index] }}</h3>
-            <div class="skills">
-              @for (skill of group; track $index) {
-              <span>{{ skill }}</span>
-              }
-            </div>
-            @if ($index === 3) {
-            <p class="linux-note">{{ copy[language()].linuxNote }}</p>
-            }
-          </div>
-          }
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="projects content-section">
-      <div class="section-heading">
-        <div>
-          <p class="section-label">{{ copy[language()].projectsLabel }}</p>
-          <h2>{{ copy[language()].projectsTitle }}</h2>
-        </div>
-        <span class="project-index">02 / 06</span>
-      </div>
-      <div class="project-grid">
-        @for (project of projects; track project.name; let i = $index) {
-        <article class="project-card" [class.project-card-primary]="i === 0">
-          <div class="project-top">
-            <span class="project-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" /><path d="m4.5 7.8 7.5 4.4 7.5-4.4M12 12.2V21" /></svg>
-            </span>
-            <span>{{ (i + 1).toString().padStart(2, '0') }}</span>
-            <span>{{ copy[language()].projectCategories[i] }}</span>
-          </div>
-          <h3>{{ copy[language()].projectNames[i] }}</h3>
-          <p>{{ copy[language()].projectsDescriptions[i] }}</p>
-          <div class="project-footer">
-            <span>{{ project.technologies }}</span>
-            @if (project.url) {
-            <a [href]="project.url" target="_blank" rel="noopener">
-              <span>{{ project.github ? copy[language()].viewGithub : copy[language()].visitSite }}</span>
-              <span class="project-arrow" aria-hidden="true">↗</span>
-            </a>
-            }
-          </div>
-        </article>
-        }
-      </div>
-    </section>
-
-    <span id="estudos" class="anchor-alias" aria-hidden="true"></span>
-    <section id="education" class="education content-section">
-      <div class="section-heading">
-        <div>
-          <p class="section-label">{{ copy[language()].educationLabel }}</p>
-          <h2>{{ copy[language()].educationTitle }}</h2>
-        </div>
-        <span class="project-index">03</span>
-      </div>
-      <div class="education-grid">
-        <article class="education-card education-higher">
-          <h3>{{ copy[language()].higherEducation }}</h3>
-          <div class="education-card-content">
-            <strong>{{ copy[language()].education }}</strong>
-            <span>Centro Universitário Internacional UNINTER</span>
-            <span class="education-status">{{ copy[language()].studying }}</span>
-          </div>
-        </article>
-        <article class="education-card education-languages">
-          <h3>{{ copy[language()].languages }}</h3>
-          <ul class="language-list">
-            @for (name of languages; track name; let i = $index) {
-            <li>
-              <strong>{{ language() === 'pt' ? name : language() === 'en' ? (i === 0 ? 'English' : 'Spanish') : (i === 0 ? 'Inglés' : 'Español') }}</strong>
-              <span>{{ copy[language()].languageLevels[i] }}</span>
-            </li>
-            }
-          </ul>
-        </article>
-        <article class="education-card education-courses">
-          <h3>{{ copy[language()].courses }}</h3>
-          <ul class="course-list">
-            @for (courseIndex of courseIndexes; track courseIndex) {
-            <li>
-              <strong>{{ copy[language()].courseNames[courseIndex] }}</strong>
-              <span>{{ copy[language()].courseProviders[courseIndex] }}</span>
-              @if (courseIndex === 3) {
-              <span class="education-status">{{ copy[language()].inProgress }}</span>
-              }
-            </li>
-            }
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" class="contact content-section">
-      <div>
-        <p class="section-label">{{ copy[language()].contactLabel }}</p>
-        <h2>{{ copy[language()].contactTitle }}</h2>
-        <p class="body-copy">{{ copy[language()].contactText }}</p>
-        <a class="button button-primary" href="mailto:theocordella@proton.me">
-          {{ copy[language()].email }} <span>↗</span>
-        </a>
-      </div>
-      <div class="contact-links">
-        <a href="mailto:theocordella@proton.me">theocordella@proton.me <span>↗</span></a>
-        <a href="https://www.linkedin.com/in/theo-cordella-89b91434a/" target="_blank" rel="noopener">LinkedIn
-          <span>↗</span></a>
-        <a href="https://instagram.com/theocordella" target="_blank" rel="noopener">Instagram Pessoal
-          <span>↗</span></a>
-        <a href="https://instagram.com/theocordella.tkd" target="_blank" rel="noopener">Instagram Taekwondo
-          <span>↗</span></a>
-        <a href="https://github.com/Mhlae" target="_blank" rel="noopener">GitHub <span>↗</span></a>
-      </div>
-    </section>
-  </main>
-  <footer><span>© 2026 THEOCORDELLA</span><span>{{ copy[language()].footer }}</span></footer>
+  <router-outlet />
+  <footer class="site-footer">
+    <span>© 2026 THEOCORDELLA</span>
+    <span>{{ copy.footer }}</span>
+  </footer>
 </div>

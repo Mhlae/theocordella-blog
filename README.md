@@ -1,60 +1,53 @@
-# TheocordellaBlog
+# Théo Cordella — Portfólio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+Portfólio pessoal em Angular com navegação por rotas, conteúdo em português,
+inglês e espanhol, temas claro e escuro, renderização no servidor e páginas
+pré-renderizadas.
 
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Desenvolvimento
 
 ```bash
-ng generate component component-name
+npm install
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+O servidor local fica disponível em `http://localhost:4200`.
+
+## Rotas
+
+- `/` redireciona para `/home`.
+- `/home` apresenta o hero e os atalhos de navegação.
+- `/projects` lista os seis projetos e um resumo da arquitetura.
+- `/about-me` apresenta o perfil pessoal e a foto (em `public/images/theo.png`).
+- `/studies` abre por padrão a aba Formação, com idiomas e cursos complementares.
+- `/studies?tab=education` abre a aba de Formação.
+- `/studies?tab=technologies` abre os cinco grupos de tecnologias.
+- `/studies?tab=certificates` abre os certificados em `public/Certificados/`.
+- `/contact` reúne os canais de contato.
+- Caminhos desconhecidos exibem a página de erro com retorno para o início.
+
+As páginas compartilham o cabeçalho e o rodapé. Na Home, os atalhos de páginas
+ficam no orbitador; nas páginas internas, o cabeçalho oferece apenas o retorno
+à Home. Os componentes de rota são carregados sob demanda e o idioma e o tema
+selecionados persistem entre rotas.
+
+## Navegação
+
+| Elemento                                         | Destino                                             |
+| ------------------------------------------------ | --------------------------------------------------- |
+| Botão Voltar ao início (páginas internas)        | `/home`                                             |
+| Hero: Ver projetos / Sobre mim                   | `/projects` / `/about-me`                           |
+| Órbita: Projetos / Sobre Mim / Estudos / Contato | `/projects` / `/about-me` / `/studies` / `/contact` |
+| Arquitetura: Conheça mais                        | `/studies?tab=technologies`                         |
+| Sobre mim: Ver meus estudos / Falar comigo       | `/studies` / `/contact`                             |
+
+## Build e testes
 
 ```bash
-ng generate --help
+npm run build
+npm test
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# theocordella-blog
+O build de produção pré-renderiza a raiz e as cinco páginas principais para
+`dist/theocordella-blog/browser`. A configuração de rewrite do Vercel mantém o
+fallback de navegação para caminhos diretos.

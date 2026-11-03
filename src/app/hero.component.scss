@@ -3,8 +3,7 @@
   color: var(--color-text);
 }
 
-.hero,
-.architecture-card {
+.hero {
   color: var(--color-text);
 }
 
@@ -24,8 +23,7 @@
   z-index: 1;
 }
 
-.hero-badge,
-.architecture-kicker {
+.hero-badge {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -91,8 +89,7 @@
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
-.action:hover,
-.architecture-copy a:hover {
+.action:hover {
   transform: translateY(-2px);
 }
 
@@ -101,8 +98,7 @@
   color: var(--color-primary-button-text);
 }
 
-.action-primary span,
-.architecture-copy a span {
+.action-primary span {
   font-size: 18px;
 }
 
@@ -113,6 +109,7 @@
 }
 
 .hero-visual {
+  --orbit-radius: 214px;
   position: relative;
   width: min(100%, 560px);
   aspect-ratio: 1;
@@ -203,16 +200,25 @@
   cursor: grab;
 }
 
-.orbit-item {
+.orbit-rotator {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
 }
 
-.orbit-item-0 { transform: translate(-50%, -50%) translateY(-214px); }
-.orbit-item-1 { transform: translate(-50%, -50%) translateX(214px); }
-.orbit-item-2 { transform: translate(-50%, -50%) translateY(214px); }
-.orbit-item-3 { transform: translate(-50%, -50%) translateX(-214px); }
+.orbit-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.orbit-item-0 { transform: translate(-50%, -50%) translateY(calc(-1 * var(--orbit-radius))); }
+.orbit-item-1 { transform: translate(-50%, -50%) translateX(var(--orbit-radius)); }
+.orbit-item-2 { transform: translate(-50%, -50%) translateY(var(--orbit-radius)); }
+.orbit-item-3 { transform: translate(-50%, -50%) translateX(calc(-1 * var(--orbit-radius))); }
 
 .orbit-button {
   min-width: 112px;
@@ -263,117 +269,13 @@
   text-transform: uppercase;
 }
 
-.architecture-card {
-  max-width: 1128px;
-  min-height: 330px;
-  margin: 0 auto 100px;
-  padding: 42px 48px;
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  align-items: center;
-  gap: 36px;
-  border: 1px solid var(--color-border);
-  border-radius: 24px;
-  background:
-    radial-gradient(ellipse at 85% 50%, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 55%),
-    var(--color-surface);
-  backdrop-filter: blur(12px);
+@media (max-width: 1100px) {
+  .hero-visual {
+    --orbit-radius: 190px;
+  }
 }
 
-.architecture-kicker {
-  margin: 0 0 16px;
-  color: var(--color-accent-strong);
-  font-size: 10px;
-}
-
-.architecture-copy h2 {
-  margin: 0 0 14px;
-  font-size: clamp(30px, 3.4vw, 42px);
-  letter-spacing: -0.055em;
-  line-height: 1.08;
-}
-
-.architecture-copy > p:not(.architecture-kicker) {
-  max-width: 440px;
-  margin: 0;
-  color: var(--color-muted);
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.architecture-copy a {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 22px;
-  color: var(--color-accent-strong);
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 160ms ease;
-}
-
-.architecture-diagram {
-  min-height: 220px;
-  display: grid;
-  grid-template-columns: minmax(100px, 0.7fr) minmax(210px, 1fr);
-  align-items: center;
-  gap: 18px;
-}
-
-.mini-pyramid {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  justify-self: center;
-  transform: perspective(500px) rotateX(60deg) rotateZ(-45deg);
-  transform-style: preserve-3d;
-}
-
-.mini-pyramid span {
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--color-accent-strong);
-  background: color-mix(in srgb, var(--color-accent-strong) 15%, transparent);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--color-accent-strong) 30%, transparent);
-}
-
-.mini-pyramid span:nth-child(1) { transform: translateZ(0); opacity: 0.35; }
-.mini-pyramid span:nth-child(2) { transform: translateZ(28px); opacity: 0.55; }
-.mini-pyramid span:nth-child(3) { transform: translateZ(56px); opacity: 0.8; }
-
-.architecture-diagram ul {
-  display: grid;
-  gap: 18px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.architecture-diagram li {
-  display: grid;
-  grid-template-columns: 34px 9px 1fr;
-  align-items: center;
-  gap: 10px;
-  color: var(--color-muted);
-  font-size: 12px;
-}
-
-.architecture-diagram li::before {
-  height: 1px;
-  background: var(--color-line);
-  content: '';
-}
-
-.architecture-diagram li i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-accent-strong);
-  box-shadow: 0 0 10px var(--color-accent-strong);
-}
-
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .hero {
     min-height: auto;
     padding: 68px 22px 40px;
@@ -388,6 +290,7 @@
 
   .hero-visual {
     width: min(100%, 460px);
+    --orbit-radius: 170px;
   }
 
   .pyramid {
@@ -395,37 +298,25 @@
     height: 145px;
   }
 
-  .orbit-item-0 { transform: translate(-50%, -50%) translateY(-170px); }
-  .orbit-item-1 { transform: translate(-50%, -50%) translateX(170px); }
-  .orbit-item-2 { transform: translate(-50%, -50%) translateY(170px); }
-  .orbit-item-3 { transform: translate(-50%, -50%) translateX(-170px); }
-
   .orbit-button {
     min-width: 94px;
     min-height: 68px;
     font-size: 11px;
   }
 
-  .architecture-card {
-    margin: 0 18px 75px;
-    padding: 30px 24px;
-    grid-template-columns: 1fr;
-    gap: 30px;
+}
+
+@media (max-width: 420px) {
+  .hero-visual {
+    --orbit-radius: min(120px, calc((100vw - 120px) / 2));
   }
 
-  .architecture-diagram {
-    min-height: 175px;
-    grid-template-columns: minmax(80px, 0.6fr) minmax(180px, 1fr);
-    gap: 10px;
+  .orbit-button {
+    min-width: 88px;
+    min-height: 62px;
+    padding: 8px 6px;
+    font-size: 10px;
   }
-
-  .mini-pyramid {
-    width: 76px;
-    height: 76px;
-  }
-
-  .mini-pyramid span:nth-child(2) { transform: translateZ(22px); }
-  .mini-pyramid span:nth-child(3) { transform: translateZ(44px); }
 }
 
 @media (max-width: 400px) {

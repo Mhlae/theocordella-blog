@@ -1,14 +1,14 @@
-<section class="hero" id="home">
+<section class="hero">
   <div class="hero-copy">
     <p class="hero-badge"><span aria-hidden="true"></span>{{ copy.badge }}</p>
     <h1>{{ copy.title }}</h1>
     <p class="hero-role">{{ copy.role }}</p>
     <p class="hero-intro">{{ copy.intro }}</p>
     <div class="hero-actions">
-      <a class="action action-primary" [routerLink]="['/']" fragment="projects">
+      <a class="action action-primary" routerLink="/projects">
         {{ copy.projects }} <span aria-hidden="true">→</span>
       </a>
-      <a class="action action-secondary" [routerLink]="['/']" fragment="about">{{ copy.about }}</a>
+      <a class="action action-secondary" routerLink="/about-me">{{ copy.about }}</a>
     </div>
   </div>
 
@@ -28,55 +28,36 @@
 
     <div
       class="orbit-ring"
-      [ngStyle]="ringStyle"
-      [attr.aria-label]="copy.dragHint"
-      [attr.aria-roledescription]="copy.dragHint">
-      @for (link of copy.orbit; track link.fragment; let i = $index) {
-        <div class="orbit-item" [class]="'orbit-item orbit-item-' + i">
-          <a
-            class="orbit-button"
-            [routerLink]="['/']"
-            [fragment]="link.fragment"
-            [ngStyle]="counterRotationStyle"
-            [attr.aria-label]="link.label">
-            @switch (link.icon) {
-              @case ('code') {
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5m-2-12-4 14" /></svg>
+      role="group"
+      [attr.aria-label]="copy.orbitLabel">
+      <div class="orbit-rotator" [ngStyle]="ringStyle">
+        @for (link of copy.orbit; track link.path; let i = $index) {
+          <div class="orbit-item" [class]="'orbit-item orbit-item-' + i">
+            <a
+              class="orbit-button"
+              [routerLink]="link.path"
+              [ngStyle]="counterRotationStyle"
+              [attr.aria-label]="link.label">
+              @switch (link.icon) {
+                @case ('code') {
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5m-2-12-4 14" /></svg>
+                }
+                @case ('user') {
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+                }
+                @case ('book') {
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5ZM4 18a2.5 2.5 0 0 1 2.5-2.5H20" /></svg>
+                }
+                @case ('mail') {
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>
+                }
               }
-              @case ('user') {
-                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
-              }
-              @case ('book') {
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5ZM4 18a2.5 2.5 0 0 1 2.5-2.5H20" /></svg>
-              }
-              @case ('mail') {
-                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>
-              }
-            }
-            <span>{{ link.label }}</span>
-          </a>
-        </div>
-      }
+              <span>{{ link.label }}</span>
+            </a>
+          </div>
+        }
+      </div>
     </div>
     <span class="drag-hint">{{ copy.dragHint }}</span>
-  </div>
-</section>
-
-<section class="architecture-card" id="architecture">
-  <div class="architecture-copy">
-    <p class="architecture-kicker">{{ copy.badge }}</p>
-    <h2>{{ copy.architecture }}</h2>
-    <p>{{ copy.architectureText }}</p>
-    <a [routerLink]="['/']" fragment="about">{{ copy.learnMore }} <span aria-hidden="true">→</span></a>
-  </div>
-  <div class="architecture-diagram" aria-label="Aplicações, orquestração e infraestrutura">
-    <div class="mini-pyramid" aria-hidden="true">
-      <span></span><span></span><span></span>
-    </div>
-    <ul>
-      @for (label of copy.layerLabels; track $index) {
-        <li><i aria-hidden="true"></i><span>{{ label }}</span></li>
-      }
-    </ul>
   </div>
 </section>

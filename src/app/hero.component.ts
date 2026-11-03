@@ -1,13 +1,14 @@
 import { NgStyle } from '@angular/common';
-import { Component, ElementRef, HostListener, input } from '@angular/core';
+import { Component, ElementRef, HostListener, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Language } from './i18n/shared-copy';
+import { LanguageService } from './services/language.service';
 
-type Language = 'pt' | 'en' | 'es';
 type OrbitIcon = 'code' | 'user' | 'book' | 'mail';
 
 interface OrbitLink {
   label: string;
-  fragment: string;
+  path: string;
   icon: OrbitIcon;
 }
 
@@ -18,7 +19,7 @@ interface OrbitLink {
   templateUrl: './hero.component.html',
 })
 export class HeroComponent {
-  readonly language = input<Language>('pt');
+  private readonly language = inject(LanguageService);
   rotationAngle = 0;
   dragging = false;
 
@@ -26,83 +27,77 @@ export class HeroComponent {
   private startRotation = 0;
   private activePointerId: number | null = null;
 
-  private readonly content: Record<Language, {
-    badge: string;
-    title: string;
-    role: string;
-    intro: string;
-    projects: string;
-    about: string;
-    architecture: string;
-    architectureText: string;
-    learnMore: string;
-    layerLabels: [string, string, string];
-    orbit: OrbitLink[];
-    dragHint: string;
-  }> = {
+  private readonly content: Record<
+    Language,
+    {
+      badge: string;
+      title: string;
+      role: string;
+      intro: string;
+      projects: string;
+      about: string;
+      orbit: OrbitLink[];
+      dragHint: string;
+      orbitLabel: string;
+    }
+  > = {
     pt: {
       badge: 'Engenharia de Software',
       title: 'Theo Cordella',
       role: 'Desenvolvedor de software e soluções digitais.',
-      intro: 'Desenvolvimento, infraestrutura e soluções inteligentes em perfeita harmonia.',
+      intro:
+        'Desenvolvedor de software com experiência em aplicações full-stack usando React, Angular, Node.js e SQL. Construo projetos completos, do banco de dados à interface, com Git e GitHub.',
       projects: 'Ver projetos',
       about: 'Sobre mim',
-      architecture: 'Arquitetura com propósito',
-      architectureText: 'Soluções bem construídas conectam experiências, serviços e infraestrutura em uma base confiável.',
-      learnMore: 'Conheça mais',
-      layerLabels: ['Aplicações (Soluções)', 'Orquestração (APIs e Serviços)', 'Fundação (Infraestrutura)'],
       orbit: [
-        { label: 'Projetos', fragment: 'projects', icon: 'code' },
-        { label: 'Sobre Mim', fragment: 'about', icon: 'user' },
-        { label: 'Estudos', fragment: 'estudos', icon: 'book' },
-        { label: 'Contato', fragment: 'contact', icon: 'mail' },
+        { label: 'Projetos', path: '/projects', icon: 'code' },
+        { label: 'Sobre Mim', path: '/about-me', icon: 'user' },
+        { label: 'Estudos', path: '/studies', icon: 'book' },
+        { label: 'Contato', path: '/contact', icon: 'mail' },
       ],
       dragHint: 'Arraste para girar',
+      orbitLabel: 'Atalhos de navegação. Arraste para girar.',
     },
     en: {
       badge: 'Software Engineering',
       title: 'Theo Cordella',
       role: 'Software developer and digital solutions specialist.',
-      intro: 'Development, infrastructure, and intelligent solutions working in harmony.',
+      intro:
+        'Software developer experienced in full-stack applications with React, Angular, Node.js, and SQL. I build complete projects, from database to interface, using Git and GitHub.',
       projects: 'View projects',
       about: 'About me',
-      architecture: 'Purposeful architecture',
-      architectureText: 'Well-built solutions connect experiences, services, and infrastructure on a reliable foundation.',
-      learnMore: 'Learn more',
-      layerLabels: ['Applications (Solutions)', 'Orchestration (APIs & Services)', 'Foundation (Infrastructure)'],
       orbit: [
-        { label: 'Projects', fragment: 'projects', icon: 'code' },
-        { label: 'About me', fragment: 'about', icon: 'user' },
-        { label: 'Studies', fragment: 'estudos', icon: 'book' },
-        { label: 'Contact', fragment: 'contact', icon: 'mail' },
+        { label: 'Projects', path: '/projects', icon: 'code' },
+        { label: 'About me', path: '/about-me', icon: 'user' },
+        { label: 'Studies', path: '/studies', icon: 'book' },
+        { label: 'Contact', path: '/contact', icon: 'mail' },
       ],
       dragHint: 'Drag to rotate',
+      orbitLabel: 'Navigation shortcuts. Drag to rotate.',
     },
     es: {
       badge: 'Ingeniería de Software',
       title: 'Theo Cordella',
       role: 'Desarrollador de software y soluciones digitales.',
-      intro: 'Desarrollo, infraestructura y soluciones inteligentes en perfecta armonía.',
+      intro:
+        'Desarrollador de software con experiencia en aplicaciones full-stack con React, Angular, Node.js y SQL. Creo proyectos completos, desde la base de datos hasta la interfaz, con Git y GitHub.',
       projects: 'Ver proyectos',
       about: 'Sobre mí',
-      architecture: 'Arquitectura con propósito',
-      architectureText: 'Las soluciones bien construidas conectan experiencias, servicios e infraestructura sobre una base confiable.',
-      learnMore: 'Conoce más',
-      layerLabels: ['Aplicaciones (Soluciones)', 'Orquestación (APIs y Servicios)', 'Fundación (Infraestructura)'],
       orbit: [
-        { label: 'Proyectos', fragment: 'projects', icon: 'code' },
-        { label: 'Sobre mí', fragment: 'about', icon: 'user' },
-        { label: 'Estudios', fragment: 'estudos', icon: 'book' },
-        { label: 'Contacto', fragment: 'contact', icon: 'mail' },
+        { label: 'Proyectos', path: '/projects', icon: 'code' },
+        { label: 'Sobre mí', path: '/about-me', icon: 'user' },
+        { label: 'Estudios', path: '/studies', icon: 'book' },
+        { label: 'Contacto', path: '/contact', icon: 'mail' },
       ],
       dragHint: 'Arrastra para girar',
+      orbitLabel: 'Accesos directos. Arrastra para girar.',
     },
   };
 
   constructor(private readonly host: ElementRef<HTMLElement>) {}
 
   get copy() {
-    return this.content[this.language()];
+    return this.content[this.language.current()];
   }
 
   get ringStyle(): Record<string, string> {
@@ -116,7 +111,11 @@ export class HeroComponent {
   @HostListener('document:pointerdown', ['$event'])
   onPointerDown(event: PointerEvent): void {
     const target = event.target;
-    if (!(target instanceof Element) || !target.closest('.orbit-ring') || target.closest('.orbit-button')) {
+    if (
+      !(target instanceof Element) ||
+      !target.closest('.orbit-ring') ||
+      target.closest('.orbit-button')
+    ) {
       return;
     }
 
@@ -162,6 +161,9 @@ export class HeroComponent {
   }
 
   private pointerAngle(x: number, y: number, bounds: DOMRect): number {
-    return Math.atan2(y - (bounds.top + bounds.height / 2), x - (bounds.left + bounds.width / 2)) * (180 / Math.PI);
+    return (
+      Math.atan2(y - (bounds.top + bounds.height / 2), x - (bounds.left + bounds.width / 2)) *
+      (180 / Math.PI)
+    );
   }
 }

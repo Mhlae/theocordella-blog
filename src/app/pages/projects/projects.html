@@ -1,0 +1,45 @@
+<main class="projects-page page-content">
+  <header class="page-heading">
+    <p class="section-kicker">{{ copy().projects.label }}</p>
+    <h1>{{ copy().projects.title }}</h1>
+  </header>
+
+  <section class="project-architecture" aria-labelledby="architecture-title">
+    <div>
+      <p class="section-kicker">{{ copy().projects.label }}</p>
+      <h2 id="architecture-title">{{ copy().projects.architectureTitle }}</h2>
+      <p>{{ copy().projects.architectureText }}</p>
+      <a class="architecture-link" routerLink="/studies" [queryParams]="{ tab: 'technologies' }">
+        {{ copy().projects.architectureMore }} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="project-grid">
+    @for (project of projects; track project.key; let i = $index) {
+      <article class="project-card" [class.project-card-primary]="i === 0">
+        <div class="project-top">
+          <span class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" />
+              <path d="m4.5 7.8 7.5 4.4 7.5-4.4M12 12.2V21" />
+            </svg>
+          </span>
+          <span class="project-number">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <span class="project-category">{{ copy().projects.categories[project.key] }}</span>
+        </div>
+        <h2>{{ copy().projects.names[project.key] }}</h2>
+        <p>{{ copy().projects.descriptions[project.key] }}</p>
+        <div class="project-footer">
+          <span class="technologies">{{ project.technologies }}</span>
+          @if (project.url) {
+            <a [href]="project.url" target="_blank" rel="noopener">
+              {{ project.github ? copy().projects.viewGithub : copy().projects.visitSite }}
+              <span aria-hidden="true">↗</span>
+            </a>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</main>

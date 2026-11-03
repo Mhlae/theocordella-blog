@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&family=Fira+Code:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@300;400&family=Manrope:wght@400;500;600&display=swap');
 
 :root,
 html[data-theme='dark'] {
@@ -16,8 +16,9 @@ html[data-theme='dark'] {
   --color-primary-button-text: #0a161b;
   --color-header-button: var(--color-primary-button);
   --color-header-button-text: var(--color-primary-button-text);
-  --font-heading: 'Exo 2', sans-serif;
+  --font-heading: 'JetBrains Mono', monospace;
   --font-body: 'Fira Code', monospace;
+  --font-ui: 'Manrope', sans-serif;
 }
 
 html[data-theme='light'] {
@@ -30,9 +31,9 @@ html[data-theme='light'] {
   --color-text: #101a1e;
   --color-muted: #4a5b5f;
   --color-accent: #3f8c88;
-  --color-accent-strong: #3f8c88;
   --color-primary-button: #12232b;
   --color-primary-button-text: #ffffff;
+  --color-accent-strong: #286d69;
 }
 
 * {
@@ -41,7 +42,6 @@ html[data-theme='light'] {
 
 html {
   min-width: 320px;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -61,7 +61,7 @@ h3 {
 
 button,
 a {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
 }
 
 :focus-visible {
@@ -73,7 +73,6 @@ a {
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
