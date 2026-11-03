@@ -1,0 +1,312 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.studies-page {
+  width: min(100% - 48px, 1128px);
+  margin: 0 auto;
+  padding: 66px 0 100px;
+  flex: 1;
+}
+
+.page-heading {
+  margin-bottom: 30px;
+}
+
+.section-kicker {
+  margin: 0 0 12px;
+  color: var(--color-accent-strong);
+  font: 500 11px/1.5 var(--font-ui);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.page-heading h1 {
+  margin: 0;
+  font-size: clamp(42px, 7vw, 72px);
+  letter-spacing: -0.07em;
+}
+
+.studies-intro {
+  max-width: 760px;
+  margin-top: 20px;
+}
+
+.studies-intro h2 {
+  margin: 0 0 10px;
+  font-size: clamp(21px, 3vw, 28px);
+  letter-spacing: -0.04em;
+}
+
+.studies-intro p {
+  margin: 0;
+  color: var(--color-muted);
+  font: 400 13px/1.8 var(--font-ui);
+}
+
+.study-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.study-tabs a {
+  min-height: 46px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  color: var(--color-muted);
+  font: 600 12px/1.5 var(--font-ui);
+  text-decoration: none;
+}
+
+.study-tabs a[aria-selected='true'] {
+  border-color: var(--color-accent-strong);
+  color: var(--color-text);
+}
+
+.study-tabs a:focus-visible,
+.study-panel:focus-visible,
+.certificate-card a:focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 4px;
+}
+
+.study-panel {
+  min-width: 0;
+}
+
+.technology-grid,
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+}
+
+.formation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+}
+
+.study-card {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+}
+
+.degree-card {
+  min-height: 210px;
+  border-color: color-mix(in srgb, var(--color-accent-strong) 48%, var(--color-border));
+}
+
+.card-label {
+  margin: 0 0 22px;
+  color: var(--color-accent-strong);
+  font: 500 10px/1.5 var(--font-ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.study-card h2 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.institution {
+  margin: 0 0 18px;
+  color: var(--color-muted);
+  font: 400 12px/1.7 var(--font-ui);
+}
+
+.study-status {
+  display: inline-flex;
+  padding: 5px 9px;
+  border: 1px solid color-mix(in srgb, var(--color-accent-strong) 45%, transparent);
+  border-radius: 999px;
+  color: var(--color-accent-strong);
+  font: 500 10px/1.4 var(--font-ui);
+}
+
+.study-list {
+  display: grid;
+  gap: 18px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.study-list li {
+  display: grid;
+  gap: 5px;
+}
+
+.study-list strong {
+  color: var(--color-text);
+  font: 600 12px/1.5 var(--font-ui);
+}
+
+.study-list li > span:not(.study-status) {
+  color: var(--color-muted);
+  font: 400 11px/1.6 var(--font-ui);
+}
+
+.courses-card {
+  grid-column: 1 / -1;
+}
+
+.courses-card .study-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.technology-card h2 {
+  color: var(--color-text);
+}
+
+.technology-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 18px 0 0;
+  list-style: none;
+}
+
+.technology-list li {
+  padding: 7px 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-muted);
+  font: 500 10px/1.4 var(--font-ui);
+}
+
+.technology-note {
+  margin: 18px 0 0;
+  color: var(--color-muted);
+  font: 400 11px/1.7 var(--font-ui);
+}
+
+.certificate-card {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.certificate-card h2 {
+  font-size: 16px;
+}
+
+.certificate-issuer {
+  margin: 0 0 16px;
+  color: var(--color-muted);
+  font: 400 12px/1.7 var(--font-ui);
+}
+
+.certificate-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  color: var(--color-muted);
+  font: 400 11px/1.5 var(--font-ui);
+}
+
+.certificate-card a {
+  display: inline-flex;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 18px;
+  color: var(--color-accent-strong);
+  font: 600 11px/1.5 var(--font-ui);
+  text-decoration: none;
+}
+
+.certificate-card a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.empty-state {
+  min-height: 280px;
+  padding: 36px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  border: 1px dashed var(--color-line);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.empty-icon {
+  color: var(--color-accent-strong);
+  font-size: 24px;
+}
+
+.empty-state h2 {
+  margin: 16px 0 8px;
+  font-size: 22px;
+}
+
+.empty-state p {
+  max-width: 400px;
+  margin: 0;
+  color: var(--color-muted);
+  font: 400 12px/1.7 var(--font-ui);
+}
+
+@media (max-width: 900px) {
+  .technology-grid,
+  .certificate-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .formation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .studies-page {
+    width: min(100% - 36px, 480px);
+    padding: 46px 0 72px;
+  }
+
+  .study-tabs {
+    gap: 0;
+  }
+
+  .study-tabs a {
+    flex: 1;
+    justify-content: center;
+    padding: 0 7px;
+    font-size: 11px;
+  }
+
+  .technology-grid,
+  .certificate-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .courses-card {
+    grid-column: auto;
+  }
+
+  .courses-card .study-list {
+    grid-template-columns: 1fr;
+  }
+
+  .study-card {
+    padding: 20px;
+  }
+}

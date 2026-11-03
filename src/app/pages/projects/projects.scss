@@ -1,0 +1,212 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.projects-page {
+  width: min(100% - 48px, 1128px);
+  margin: 0 auto;
+  padding: 66px 0 100px;
+  flex: 1;
+}
+
+.page-heading {
+  margin-bottom: 30px;
+}
+
+.section-kicker {
+  margin: 0 0 12px;
+  color: var(--color-accent-strong);
+  font: 500 11px/1.5 var(--font-ui);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.page-heading h1 {
+  margin: 0;
+  font-size: clamp(42px, 7vw, 72px);
+  letter-spacing: -0.07em;
+}
+
+.project-architecture {
+  margin-bottom: 24px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      color-mix(in srgb, var(--color-accent) 9%, transparent),
+      transparent 58%
+    ),
+    var(--color-surface);
+  backdrop-filter: blur(12px);
+}
+
+.project-architecture .section-kicker {
+  margin-bottom: 8px;
+}
+
+.project-architecture h2 {
+  margin: 0 0 8px;
+  font-size: clamp(20px, 2.5vw, 26px);
+  letter-spacing: -0.045em;
+}
+
+.project-architecture p:not(.section-kicker) {
+  margin: 0;
+  color: var(--color-muted);
+  font: 400 12px/1.7 var(--font-ui);
+}
+
+.architecture-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: var(--color-accent-strong);
+  font: 600 11px/1.5 var(--font-ui);
+  text-decoration: none;
+}
+
+.architecture-link:hover,
+.architecture-link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.project-card {
+  min-width: 0;
+  min-height: 286px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+}
+
+.project-card-primary {
+  border-color: color-mix(in srgb, var(--color-accent-strong) 52%, var(--color-border));
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      color-mix(in srgb, var(--color-accent) 10%, transparent),
+      transparent 60%
+    ),
+    var(--color-surface);
+}
+
+.project-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-muted);
+  font: 500 10px/1.5 var(--font-ui);
+  letter-spacing: 0.08em;
+}
+
+.project-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  margin-right: auto;
+  border: 1px solid var(--color-line);
+  border-radius: 9px;
+  color: var(--color-accent-strong);
+}
+
+.project-icon svg {
+  width: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.4;
+}
+
+.project-card h2 {
+  margin: 22px 0 10px;
+  font-size: clamp(18px, 2.2vw, 23px);
+  line-height: 1.3;
+}
+
+.project-card > p {
+  margin: 0 0 22px;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.project-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--color-line);
+}
+
+.technologies {
+  color: var(--color-muted);
+  font: 400 10px/1.7 var(--font-ui);
+}
+
+.project-footer a {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-accent-strong);
+  font: 600 11px/1.5 var(--font-ui);
+  text-decoration: none;
+}
+
+.project-footer a:hover,
+.project-footer a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .projects-page {
+    width: min(100% - 36px, 480px);
+    padding: 46px 0 72px;
+  }
+
+  .project-architecture {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    min-height: 260px;
+    padding: 20px;
+  }
+}

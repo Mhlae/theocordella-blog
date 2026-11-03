@@ -1,0 +1,20 @@
+<main class="contact-page page-content">
+  <section class="contact-copy" aria-labelledby="contact-title">
+    <p class="section-kicker">{{ copy().contact.title }}</p>
+    <h1 id="contact-title">{{ copy().contact.headline }}</h1>
+    <p class="contact-intro">{{ copy().contact.text }}</p>
+    <a class="email-button" [href]="'mailto:' + email">
+      {{ copy().contact.emailButton }} <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+  <nav class="contact-links" [attr.aria-label]="copy().contact.title">
+    @for (link of links; track link.href; let i = $index) {
+      <a [href]="link.href" [attr.target]="link.external ? '_blank' : null"
+        [attr.rel]="link.external ? 'noopener' : null">
+        <span>{{ copy().contact.links[i] }}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    }
+  </nav>
+</main>
