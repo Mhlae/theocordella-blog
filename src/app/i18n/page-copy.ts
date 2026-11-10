@@ -14,7 +14,7 @@ export const pageCopy = {
       home: 'Conheça Théo Cordella, desenvolvedor de software com foco em aplicações, infraestrutura e soluções digitais.',
       projects:
         'Projetos de desenvolvimento full-stack, aplicações web e infraestrutura criados por Théo Cordella.',
-      about: 'Conheça Théo Cordella.',
+      about: 'Conheça Théo Cordella, estudante de Engenharia de Software, apaixonado por tecnologia e praticante e instrutor de taekwondo.',
       studies: 'Formação, tecnologias e certificados de Théo Cordella.',
       contact:
         'Entre em contato com Théo Cordella para conversar sobre oportunidades profissionais.',
@@ -49,7 +49,34 @@ export const pageCopy = {
     about: {
       title: 'Sobre mim',
       personalText:
-        'Sou o Théo. Estudo Engenharia de Software na UNINTER e continuo aprendendo por fora, de forma autodidata, construindo projetos e estudando por conta própria.',
+        'Sou o Theo Cordella, tenho 18 anos e estudo Engenharia de Software na UNINTER. Desde pequeno, jogos e filmes com temas de tecnologia alimentam minha curiosidade. Hoje, me interesso especialmente por inteligência artificial e robôs. Na faculdade, gosto de resolver problemas e entender como as coisas são desenvolvidas.',
+      journeyLabel: 'O que me trouxe até aqui',
+      journey: [
+        {
+          title: 'A tecnologia entrou em cena',
+          text: 'Desde pequeno, jogos e filmes com temas de tecnologia alimentam minha curiosidade.',
+        },
+        {
+          title: 'Aprender de vários jeitos',
+          text: 'Além da faculdade, faço cursos e bootcamps, pesquiso artigos e acompanho vídeos de pessoas experientes na área. Também comecei uma jornada de leitura de livros para continuar aprendendo.',
+        },
+        {
+          title: 'Resolver problemas',
+          text: 'Na Engenharia de Software, gosto de entender como as coisas são desenvolvidas e de encontrar soluções para os desafios.',
+        },
+        {
+          title: 'Dez anos de taekwondo',
+          text: 'Pratico taekwondo há 10 anos. Disciplina, cortesia, integridade, perseverança, autocontrole e espírito indomável são valores que levo comigo dentro e fora dos treinos.',
+        },
+        {
+          title: 'Aprender também ensinando',
+          text: 'Também dou aulas de taekwondo. Ensinar contribui muito para o meu desenvolvimento pessoal, e é especial acompanhar as crianças crescendo e aprendendo.',
+        },
+        {
+          title: 'Curiosidade pelas pessoas',
+          text: 'Gosto de conversar, conhecer coisas e pessoas novas e entender melhor como pensamos e aprendemos. Curiosidade, criatividade e responsabilidade são características que procuro levar para tudo o que faço.',
+        },
+      ],
       photoAlt: 'Foto de Théo Cordella',
       studiesLink: 'Ver meus estudos',
       contactLink: 'Falar comigo',
@@ -162,7 +189,7 @@ export const pageCopy = {
       home: 'Meet Theo Cordella, a software developer focused on applications, infrastructure, and digital solutions.',
       projects:
         'Full-stack development, web applications, and infrastructure projects by Theo Cordella.',
-      about: 'Meet Theo Cordella.',
+      about: 'Meet Theo Cordella, a Software Engineering student passionate about technology and a taekwondo practitioner and instructor.',
       studies: 'Education, technologies, and certificates of Theo Cordella.',
       contact: 'Get in touch with Theo Cordella to discuss professional opportunities.',
       notFound: 'The page you are looking for could not be found.',
@@ -197,7 +224,34 @@ export const pageCopy = {
     about: {
       title: 'About me',
       personalText:
-        "I'm Théo. I study Software Engineering at UNINTER and keep learning on my own, as a self-taught developer, building projects and studying independently.",
+        "I'm Theo Cordella, I'm 18, and I study Software Engineering at UNINTER. Since I was little, games and movies about technology have fueled my curiosity. These days, I'm especially interested in artificial intelligence and robots. At university, I enjoy solving problems and understanding how things are developed.",
+      journeyLabel: 'What brought me here',
+      journey: [
+        {
+          title: 'Technology took the stage',
+          text: 'Since I was little, games and movies about technology have fueled my curiosity.',
+        },
+        {
+          title: 'Learning in different ways',
+          text: 'Alongside university, I take courses and bootcamps, read articles, and follow videos by experienced people in the field. I have also started a new journey of reading books to keep learning.',
+        },
+        {
+          title: 'Solving problems',
+          text: 'In Software Engineering, I enjoy understanding how things are developed and finding solutions to challenges.',
+        },
+        {
+          title: 'Ten years of taekwondo',
+          text: "I've practiced taekwondo for 10 years. Discipline, courtesy, integrity, perseverance, self-control, and indomitable spirit are values I carry with me on and off the mat.",
+        },
+        {
+          title: 'Learning by teaching, too',
+          text: 'I also teach taekwondo. Teaching contributes a lot to my personal growth, and it is special to watch the children grow and learn.',
+        },
+        {
+          title: 'Curiosity about people',
+          text: 'I enjoy talking, discovering new things and meeting new people, and better understanding how we think and learn. Curiosity, creativity, and responsibility are qualities I try to bring to everything I do.',
+        },
+      ],
       photoAlt: 'Photo of Théo Cordella',
       studiesLink: 'View my studies',
       contactLink: 'Get in touch',
@@ -305,7 +359,7 @@ export const pageCopy = {
       home: 'Conoce a Theo Cordella, desarrollador de software enfocado en aplicaciones, infraestructura y soluciones digitales.',
       projects:
         'Proyectos de desarrollo full-stack, aplicaciones web e infraestructura creados por Theo Cordella.',
-      about: 'Conoce a Theo Cordella.',
+      about: 'Conoce a Theo Cordella, estudiante de Ingeniería de Software, apasionado por la tecnología y practicante e instructor de taekwondo.',
       studies: 'Formación, tecnologías y certificados de Theo Cordella.',
       contact: 'Contacta con Theo Cordella para conversar sobre oportunidades profesionales.',
       notFound: 'No se encontró la página que buscas.',
@@ -339,7 +393,34 @@ export const pageCopy = {
     about: {
       title: 'Sobre mí',
       personalText:
-        'Soy Théo. Estudio Ingeniería de Software en UNINTER y sigo aprendiendo por mi cuenta, de forma autodidacta, creando proyectos y estudiando de manera independiente.',
+        'Soy Theo Cordella, tengo 18 años y estudio Ingeniería de Software en UNINTER. Desde pequeño, los videojuegos y las películas sobre tecnología alimentan mi curiosidad. Hoy me interesan especialmente la inteligencia artificial y los robots. En la universidad, disfruto resolver problemas y entender cómo se desarrollan las cosas.',
+      journeyLabel: 'Lo que me trajo hasta aquí',
+      journey: [
+        {
+          title: 'La tecnología entró en escena',
+          text: 'Desde pequeño, los videojuegos y las películas sobre tecnología alimentan mi curiosidad.',
+        },
+        {
+          title: 'Aprender de distintas maneras',
+          text: 'Además de la universidad, hago cursos y bootcamps, leo artículos y sigo videos de personas con experiencia en el área. También he empezado una nueva etapa de lectura de libros para seguir aprendiendo.',
+        },
+        {
+          title: 'Resolver problemas',
+          text: 'En Ingeniería de Software, disfruto entender cómo se desarrollan las cosas y encontrar soluciones a los desafíos.',
+        },
+        {
+          title: 'Diez años de taekwondo',
+          text: 'Practico taekwondo desde hace 10 años. La disciplina, la cortesía, la integridad, la perseverancia, el autocontrol y el espíritu indomable son valores que me acompañan dentro y fuera del entrenamiento.',
+        },
+        {
+          title: 'Aprender también enseñando',
+          text: 'También doy clases de taekwondo. Enseñar contribuye mucho a mi desarrollo personal, y es especial acompañar a los niños mientras crecen y aprenden.',
+        },
+        {
+          title: 'Curiosidad por las personas',
+          text: 'Me gusta conversar, descubrir cosas nuevas, conocer gente y entender mejor cómo pensamos y aprendemos. Intento llevar la curiosidad, la creatividad y la responsabilidad a todo lo que hago.',
+        },
+      ],
       photoAlt: 'Foto de Théo Cordella',
       studiesLink: 'Ver mis estudios',
       contactLink: 'Hablemos',

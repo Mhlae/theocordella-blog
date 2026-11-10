@@ -31,5 +31,14 @@
         <a class="action action-secondary" routerLink="/contact">{{ copy().about.contactLink }}</a>
       </div>
     </div>
+
+    <ol class="journey" [attr.aria-label]="copy().about.journeyLabel">
+      @for (milestone of copy().about.journey; track milestone.title) {
+        <li class="journey-item">
+          <h2>{{ milestone.title }}</h2>
+          <p>{{ milestone.text }}</p>
+        </li>
+      }
+    </ol>
   </section>
 </main>
